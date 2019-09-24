@@ -24,9 +24,38 @@ do the equation while the result of the quardatic formula is less than 2000...
 #include "pch.h"
 #include <iostream>
 
+int IsPrime(unsigned long long int n)
+{
+	int i;
+	unsigned long long root;
+	if (n == 1) return 0;
+	root = sqrtl(n);
+	for (i = 2; i <= root && n % i > 0; i++);
+	return i > root;
+}
+
 int main()
 {
-    std::cout << "Hello World!\n"; 
+	unsigned int a, b, ctr, longestprimes = 0, n;
+	for (a = 1; a < 1000; a++)
+	{
+		for (b = 1; b <= 1000; b++)
+		{
+			n = 0;
+			ctr = 0;
+			while (IsPrime(n * n + a * n + b))
+			{
+				n++;
+				ctr++;
+			}
+			if (ctr > longestprimes)
+			{
+				longestprimes = ctr;
+				printf("\n%5d %5d %5d", a, b, ctr);
+			}
+		}
+	}
+	printf("\nHello World!");
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
